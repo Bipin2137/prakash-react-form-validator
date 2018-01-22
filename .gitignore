@@ -1,6 +1,6 @@
 node_modules/
 .npmignore
+.gitignore
 package.json
-src/
 .babelrc
 webpack.config.babel.js
