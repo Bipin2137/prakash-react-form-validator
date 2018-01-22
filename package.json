@@ -9,8 +9,13 @@
   "readme": "README.md",
   "dependencies": {
     "lodash": "^4.17.4",
+    "prop-types": "^15.6.0",
     "react": "^15.5.4",
     "webpack": "^2.6.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:naiduprakash/prakash-react-form-validator.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

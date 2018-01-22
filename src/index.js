@@ -1,7 +1,16 @@
 import React from 'react';
 import { forEach, isEqual }  from 'lodash';
+import PropTypes from 'prop-types';
 
 export default class Validator extends React.Component{
+
+    static propTypes (){
+        isFormSubmitted:PropTypes.bool.isRequired;
+        reference:PropTypes.any.isRequired;
+        validationRules:PropTypes.object.isRequired;
+        validationMessages:PropTypes.object.isRequired;
+        isValidationError:PropTypes.func.isRequired;
+    }
 
     constructor(props){
         super(props);
@@ -11,25 +20,34 @@ export default class Validator extends React.Component{
     }
 
     componentDidUpdate(prevProps){
-        if (!isEqual(this.props.reference,prevProps.reference)){
-            let { validationRules, validationMessages, reference } = this.props;
+        let {isFormSubmitted,reference,validationRules,validationMessages,isValidationError} = this.props;
+        if ( !isEqual( isFormSubmitted, prevProps.isFormSubmitted ) || !isEqual( reference, prevProps.reference )){
             if( validationRules ){
                 let flag=true;
                 forEach( validationRules, ( rule, func ) => {
                     if (flag){
-                        debugger;
                         let message = validationMessages[func];
                         if( this[func]( rule, reference ) ){
                             this.setState({error:message});
                             flag=false;
+
                         }else{
                             this.setState({error:""});
                         }
                     }
-                })
+                });
+                if(flag){
+                    if(isValidationError){
+                        isValidationError(false);
+                    }
+                }
+                else{
+                    if(isValidationError){
+                        isValidationError(true);
+                    }
+                }
             }
         }
-        
     }
     required( rule, value ){
         if (rule === true){
@@ -85,7 +103,7 @@ export default class Validator extends React.Component{
     render(){
         let { error } = this.state;
         return( 
-            <span className="error">{error}</span>
+            <span className="error" style={{color:red,fontSize:`12'px'`}}>{error}</span>
         );
     }
 
