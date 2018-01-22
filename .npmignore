@@ -1,6 +1,0 @@
-node_modules/
-.npmignore
-.package.json
-src/
-.babelrc
-.webpack.config.babel.js
