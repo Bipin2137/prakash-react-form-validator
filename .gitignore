@@ -1,10 +1,6 @@
-# Don't check auto-generated stuff into git
-coverage
-build
-node_modules
-stats.json
-
-# Cruft
-.DS_Store
-npm-debug.log
-.idea
+node_modules/
+.npmignore
+.package.json
+src/
+.babelrc
+.webpack.config.babel.js
